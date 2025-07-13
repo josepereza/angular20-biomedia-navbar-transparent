@@ -1,0 +1,48 @@
+<nav
+  class="navbar navbar-expand-lg navbar-dark fixed-top"
+  [class.bg-dark]="isScrolled"
+  [class.navbar-transparent]="!isScrolled"
+>
+  <div class="container">
+    <a class="navbar-brand" href="#">
+      <img
+        src="/VM.png"
+        alt="Logo"
+        width="80"
+        class="d-inline-block align-text-top"
+      />
+    </a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarNav"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="#home">Inicio</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#about">Sobre Nosotros</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#services">Servicios</a>
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            [routerLink]="['/portafolio']"
+            routerLinkActive="router-link-active"
+            >Portafolio
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#contact">Contacto</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>

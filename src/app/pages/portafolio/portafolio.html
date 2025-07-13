@@ -1,0 +1,153 @@
+<div class="gallery-container">
+  <div class="gallery-wrapper">
+    <!-- Header -->
+    <div class="text-center mb-5">
+      <h1 class="gallery-title">Galería de Imágenes</h1>
+      <p class="gallery-subtitle">Grid responsive con Bootstrap 5 - Manejo inteligente de dimensiones</p>
+    </div>
+
+    <!-- Grid mejorado -->
+    <div class="image-grid">
+      <div 
+        *ngFor="let image of images; trackBy: trackByImageId"
+        class="image-card">
+        
+        <!-- Imagen Container -->
+        <div class="image-container" 
+             [style.height]="getImageHeight(image.id)"
+             (click)="openLightbox(image)">
+          <img 
+            [src]="image.src" 
+            [alt]="image.alt"
+            class="image-main"
+            loading="lazy"
+            (load)="onImageLoad(image.id, $event)"
+            (error)="onImageError($event)"
+          />
+          
+          <!-- Overlay con botones -->
+         <!--  <div class="image-overlay">
+            <div class="overlay-actions">
+              <button 
+                [ngClass]="{'btn-liked': isLiked(image.id)}"
+                class="action-btn"
+                (click)="toggleLike(image.id)"
+                [attr.aria-label]="'Dar like a ' + image.title">
+                <i class="fas fa-heart"></i>
+              </button>
+              
+              <button 
+                class="action-btn"
+                (click)="onImageView(image.id)"
+                [attr.aria-label]="'Ver ' + image.title">
+                <i class="fas fa-eye"></i>
+              </button>
+              
+              <button 
+                class="action-btn"
+                (click)="onImageDownload(image.id)"
+                [attr.aria-label]="'Descargar ' + image.title">
+                <i class="fas fa-download"></i>
+              </button>
+            </div>
+          </div>
+        </div> -->
+
+        <!-- Card Info -->
+       <!--  <div class="card-info">
+          <h3 class="card-title">{{ image.title }}</h3>
+          
+          <div class="card-author">
+            <i class="fas fa-user"></i>
+            {{ image.author }}
+          </div>
+          
+          <div class="card-stats">
+            <div class="stat-item">
+              <i class="fas fa-heart"></i>
+              {{ getLikeCount(image) }}
+            </div>
+            <div class="stat-item">
+              <i class="fas fa-eye"></i>
+              {{ image.views }}
+            </div>
+          </div>
+        </div> -->
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Lightbox Modal -->
+<div *ngIf="isLightboxOpen" 
+     class="lightbox-overlay"
+     (click)="closeLightbox()"
+     (keydown)="onKeyDown($event)"
+     tabindex="0">
+  
+  <div class="lightbox-container" (click)="$event.stopPropagation()">
+    <!-- Botón cerrar -->
+    <button class="lightbox-close" (click)="closeLightbox()" aria-label="Cerrar">
+      <i class="fas fa-times"></i>
+    </button>
+    
+    <!-- Navegación anterior -->
+    <button class="lightbox-nav lightbox-prev" (click)="previousImage()" aria-label="Imagen anterior">
+      <i class="fas fa-chevron-left"></i>
+    </button>
+    
+    <!-- Imagen principal -->
+    <div class="lightbox-image-container">
+      <img [src]="selectedImage?.src" 
+           [alt]="selectedImage?.alt"
+           class="lightbox-image"
+           loading="lazy">
+    </div>
+    
+    <!-- Navegación siguiente -->
+    <button class="lightbox-nav lightbox-next" (click)="nextImage()" aria-label="Imagen siguiente">
+      <i class="fas fa-chevron-right"></i>
+    </button>
+    
+    <!-- Información de la imagen -->
+    <div class="lightbox-info">
+      <h3 class="lightbox-title">{{ selectedImage?.title }}</h3>
+      <div class="lightbox-meta">
+        <span class="lightbox-author">
+          <i class="fas fa-user"></i>
+          {{ selectedImage?.author }}
+        </span>
+        <div class="lightbox-stats">
+          <span class="stat-item">
+            <i class="fas fa-heart"></i>
+            {{ selectedImage ? getLikeCount(selectedImage) : 0 }}
+          </span>
+          <span class="stat-item">
+            <i class="fas fa-eye"></i>
+            {{ selectedImage?.views }}
+          </span>
+        </div>
+      </div>
+      
+      <!-- Acciones en lightbox -->
+     <!--  <div class="lightbox-actions">
+        <button 
+          [ngClass]="{'btn-liked': selectedImage && isLiked(selectedImage.id)}"
+          class="lightbox-action-btn"
+          (click)="selectedImage && toggleLike(selectedImage.id)"
+          aria-label="Dar like">
+          <i class="fas fa-heart"></i>
+          Me gusta
+        </button>
+        
+        <button 
+          class="lightbox-action-btn"
+          (click)="selectedImage && onImageDownload(selectedImage.id)"
+          aria-label="Descargar imagen">
+          <i class="fas fa-download"></i>
+          Descargar
+        </button>
+      </div> -->
+    </div>
+  </div>
+</div>
