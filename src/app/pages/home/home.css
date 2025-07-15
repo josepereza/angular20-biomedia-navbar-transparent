@@ -52,7 +52,18 @@
       transform: translateY(-5px);
       box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
     }
+    .card {
+       box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    } 
 
+    .card:hover .card-title {
+      color: #c19957; /* Color al hacer hover (por ejemplo: azul Bootstrap) */
+    }
     .contact-section {
       background: #1a1a1a;
     }
